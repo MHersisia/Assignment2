@@ -1,10 +1,19 @@
 package domain;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class Context {
 	private ArrayList<Purpose> purposes;
@@ -114,7 +123,35 @@ public class Context {
 			
 		}
 		else if(ext.equals(".xml")) {
+			try {
+				File fXmlFile = new File(path);
+				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(fXmlFile);			 
 			
+				doc.getDocumentElement().normalize();
+				NodeList nList = doc.getElementsByTagName("pattern");
+				for (int temp = 0; temp < nList.getLength(); temp++) {
+					 
+					Node nNode = nList.item(temp);
+			 
+					System.out.println("\nCurrent Element :" + nNode.getNodeName());
+			 
+					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			 
+						Element eElement = (Element) nNode;
+						
+						Purpose pur = searchPurpose(eElement.getElementsByTagName("purpose").item(0).getTextContent());
+						Scope scp = searchScope(eElement.getElementsByTagName("scope").item(0).getTextContent());
+						Pattern p = new Pattern(eElement.getElementsByTagName("name").item(0).getTextContent(),eElement.getElementsByTagName("context").item(0).getTextContent(),eElement.getElementsByTagName("problem").item(0).getTextContent(),eElement.getElementsByTagName("solution").item(0).getTextContent(),eElement.getElementsByTagName("diagram").item(0).getTextContent(),eElement.getElementsByTagName("consequences").item(0).getTextContent(),pur,scp);
+						patterns.add(p);
+						writeObject(p);
+					}
+				}
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		else {
 			
