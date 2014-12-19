@@ -63,17 +63,12 @@ public class ShowFrame extends JFrame {
 		c.gridx = 0;
 		c.gridy = 6;
 		panel.add(lab3,c);
-		
-		lab4 = new JLabel(pattern.getContext());
-		c.gridx = 0;
-		c.gridy = 7;
-		panel.add(lab4,c);
 		try{
 			URL url  = new URL(pattern.getDiagram());
 			BufferedImage image = ImageIO.read(url);
 			labImage = new JLabel(new ImageIcon(image));
-			c.gridx = 2;
-			c.gridy = 0;
+			c.gridx = 0;
+			c.gridy = 10;
 			panel.add(labImage,c);
 		}catch (Exception e){
 			e.printStackTrace();
