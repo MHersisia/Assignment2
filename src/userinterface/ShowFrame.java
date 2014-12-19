@@ -95,9 +95,9 @@ public class ShowFrame extends JFrame {
 			c.gridy = 10;
 			panel.add(labImage,c);
 		}catch (Exception e){
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} 
-		setSize(700, 650);
+		setSize(900, 650);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
