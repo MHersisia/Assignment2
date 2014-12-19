@@ -3,7 +3,6 @@ package userinterface;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
@@ -19,7 +18,7 @@ public class ShowFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
-	private JLabel lab, lab2,lab3,lab4,lab5,lab6,lab7,labImage,lab8;
+	private JLabel lab, lab2,lab3,lab4,lab5,lab6,lab7,labImage;
 	private Pattern pattern;
 	private GridBagConstraints c = new GridBagConstraints();
 	public ShowFrame(Pattern p) {
