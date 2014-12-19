@@ -3,7 +3,10 @@ package userinterface;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,7 +18,8 @@ public class EditFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JLabel lab, lab2,lab3,lab4,lab5,lab6,lab7;
-	private JTextField tf1;
+	private JTextField tf1,tf2;
+	private JButton jb1;
 	private Pattern pattern;
 	private GridBagConstraints c = new GridBagConstraints();
 	public EditFrame(Pattern p){
@@ -31,13 +35,18 @@ public class EditFrame extends JFrame{
 		c.gridy = 0;
 		panel.add(lab,c);
 		tf1 = new JTextField(15);
-		panel.add(tf1);
-		pattern.setName(tf1.getText());
+		c.gridx = 1;
+		c.gridy = 0;
+		panel.add(tf1,c);
 		
 		lab4 = new JLabel(pattern.getContext());
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 0;
 		panel.add(lab4,c);
+		tf2 = new JTextField(15);
+		c.gridx = 1;
+		c.gridy = 1;
+		panel.add(tf2,c);
 		
 		lab5 = new JLabel(pattern.getProblem());
 		c.gridx = 0;
@@ -69,9 +78,21 @@ public class EditFrame extends JFrame{
 		c.gridy = 7;
 		panel.add(lab4,c);
 		
+		jb1 = new JButton("Submit");
+		jb1.addActionListener(editPattern);
+		c.gridx = 0;
+		c.gridy = 8;
+		panel.add(jb1,c);
+		
 		setSize(500, 300);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
+	ActionListener editPattern = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+			
+		}
+	};
 
 }

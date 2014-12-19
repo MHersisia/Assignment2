@@ -3,7 +3,11 @@ package userinterface;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,7 +18,7 @@ public class ShowFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
-	private JLabel lab, lab2,lab3,lab4,lab5,lab6,lab7;
+	private JLabel lab, lab2,lab3,lab4,lab5,lab6,lab7,labImage;
 	private Pattern pattern;
 	private GridBagConstraints c = new GridBagConstraints();
 	public ShowFrame(Pattern p) {
@@ -64,7 +68,16 @@ public class ShowFrame extends JFrame {
 		c.gridx = 0;
 		c.gridy = 7;
 		panel.add(lab4,c);
-		
+		try{
+			URL url  = new URL(pattern.getDiagram());
+			BufferedImage image = ImageIO.read(url);
+			labImage = new JLabel(new ImageIcon(image));
+			c.gridx = 2;
+			c.gridy = 0;
+			panel.add(labImage,c);
+		}catch (Exception e){
+			e.printStackTrace();
+		} 
 		setSize(500, 300);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
