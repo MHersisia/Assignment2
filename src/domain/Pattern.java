@@ -35,6 +35,46 @@ public class Pattern implements Serializable {
 		scope = sc;
 	}
 	
+	public String getContext() {
+		return context;
+	}
+
+	public void setContext(String context) {
+		this.context = context;
+	}
+
+	public String getProblem() {
+		return problem;
+	}
+
+	public void setProblem(String problem) {
+		this.problem = problem;
+	}
+
+	public String getSolution() {
+		return solution;
+	}
+
+	public void setSolution(String solution) {
+		this.solution = solution;
+	}
+
+	public String getDiagram() {
+		return diagram;
+	}
+
+	public void setDiagram(String diagram) {
+		this.diagram = diagram;
+	}
+
+	public String getConsequences() {
+		return consequences;
+	}
+
+	public void setConsequences(String consequences) {
+		this.consequences = consequences;
+	}
+
 	public void setPurpose(Purpose p) {
 		purpose = p;
 	}
