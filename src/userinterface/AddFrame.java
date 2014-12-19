@@ -40,7 +40,7 @@ public class AddFrame extends JFrame {
 
 		setSize(500, 300);
 		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
 	ActionListener selectPatterns = new ActionListener() {
