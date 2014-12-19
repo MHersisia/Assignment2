@@ -18,7 +18,7 @@ public class Main {
 		
 		Purpose p1 = new Purpose("Creational"); c.addPurpose(p1);
 		Purpose p2 = new Purpose("Structural"); c.addPurpose(p2);
-		Purpose p3 = new Purpose("Behavorial"); c.addPurpose(p3);
+		Purpose p3 = new Purpose("Behavioral"); c.addPurpose(p3);
 		
 		Scope s1 = new Scope("Class"); c.addScope(s1);
 		Scope s2 = new Scope("Object"); c.addScope(s2);
