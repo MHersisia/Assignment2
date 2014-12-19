@@ -86,6 +86,10 @@ public class Context {
 		patterns.add(p);
 	}
 	
+	public void removePattern(Pattern p) {
+		patterns.remove(p);
+	}
+	
 	public String[] getPatternsString() {
 		String[] array = new String[patterns.size()];
 		int counter = 0;

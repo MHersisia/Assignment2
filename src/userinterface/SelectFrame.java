@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import domain.Context;
@@ -14,7 +16,7 @@ import domain.Pattern;
 
 public class SelectFrame extends JFrame {
 	private Context con;
-	private JButton mb1,mb2,mb3;
+	private JButton mb1,mb2,mb3,mb4;
 	private MyComboBox mcb1,mcb2,mcb3;
 	private JPanel panel,panel_1,panel_2;
 
@@ -38,8 +40,8 @@ public class SelectFrame extends JFrame {
         		mcb2 = new MyComboBox(c.getScopesString());
         		panel_1.add(mcb2);
         		
-        		mb1 = new JButton("Show");
-        		mb1.addActionListener(showPattern);
+        		mb1 = new JButton("Search");
+        		mb1.addActionListener(searchPattern);
         		panel_1.add(mb1);
             }
         }
@@ -53,11 +55,15 @@ public class SelectFrame extends JFrame {
         		
         		mb2 = new JButton("Show");
         		panel_2.add(mb2);
-        		mb2.addActionListener(showPatternInfo);
+        		mb2.addActionListener(searchPatternInfo);
         		
         		mb3 = new JButton("Edit");
         		panel_2.add(mb3);
         		mb3.addActionListener(editPatternInfo);
+        		
+        		mb4 = new JButton("Delete");
+        		panel_2.add(mb4);
+        		mb4.addActionListener(deletePattern);
             }
         }
 
@@ -66,7 +72,7 @@ public class SelectFrame extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}	
 	
-	ActionListener showPattern = new ActionListener() {
+	ActionListener searchPattern = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			mcb3.removeAllItems();
 			String pur = (String) mcb1.getSelectedItem();
@@ -83,13 +89,14 @@ public class SelectFrame extends JFrame {
 		}
 	};
 	
-	ActionListener showPatternInfo = new ActionListener() {
+	ActionListener searchPatternInfo = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			String pattern = (String) mcb3.getSelectedItem();
 			for(Pattern p : con.getPatterns()) {
 				if(p.getName().equals(pattern)) {
 					System.out.println(p.getName()+" clicked");
 					new ShowFrame(p);
+					break;
 				}
 			}			
 		}
@@ -102,6 +109,31 @@ public class SelectFrame extends JFrame {
 				if(p.getName().equals(pattern)) {
 					System.out.println(p.getName()+" clicked");
 					new EditFrame(p);
+					break;
+				}
+			}	
+		}
+	};
+	
+	ActionListener deletePattern = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String pattern = (String) mcb3.getSelectedItem();
+			for(Pattern p : con.getPatterns()) {
+				if(p.getName().equals(pattern)) {
+					int n = JOptionPane.showConfirmDialog(null, "Do you really want to delete "+p.getName()+"?", "Delete "+p.getName(), JOptionPane.YES_NO_OPTION);
+					if (n == JOptionPane.YES_OPTION) {
+						try {
+							File file = new File("objecten/"+p.getName()+".obj");
+							file.delete();
+							con.removePattern(p);							
+							JOptionPane.showMessageDialog(null, p.getName()+" succesfully removed.", p.getName()+" deleted", JOptionPane.PLAIN_MESSAGE);
+							dispose();
+						}
+						catch(Exception ex) {
+							JOptionPane.showMessageDialog(null, p.getName()+" can not be removed.", "Error", JOptionPane.ERROR_MESSAGE);
+						}						
+					} 
+					break;
 				}
 			}	
 		}
