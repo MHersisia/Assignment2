@@ -101,6 +101,7 @@ public class SelectFrame extends JFrame {
 			for(Pattern p : con.getPatterns()) {
 				if(p.getName().equals(pattern)) {
 					System.out.println(p.getName()+" clicked");
+					new EditFrame(p);
 				}
 			}	
 		}
