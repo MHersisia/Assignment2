@@ -9,6 +9,7 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -53,12 +54,20 @@ public class AddFrame extends JFrame {
 			int returnVal = fc.showOpenDialog(panel);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File[] files = fc.getSelectedFiles();
+				StringBuilder filesRead = new StringBuilder();
 				for(int i = 0;i<files.length;i++) {
 					String ext = files[i].getName().substring(files[i].getName().lastIndexOf('.'));
 					if(ext!=null && ext!="") {
-						con.parseToPattern(files[i].getPath(),files[i].getName(),ext);
+						if(con.parseToPattern(files[i].getPath(),files[i].getName(),ext)) {
+							filesRead.append(files[i].getName()+" succesfully read\n");
+						}
+						else {
+							filesRead.append(files[i].getName()+" invalid\n");
+						}
+						
 					}
 				}
+				JOptionPane.showMessageDialog(null, filesRead, "File(s) read",JOptionPane.PLAIN_MESSAGE);
 			}	
 		}
 	};

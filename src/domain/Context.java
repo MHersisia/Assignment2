@@ -100,7 +100,8 @@ public class Context {
 		return patterns;
 	}
 	
-	public void parseToPattern(String path,String file,String ext) {
+	public boolean parseToPattern(String path,String file,String ext) {
+		boolean b = true;
 		if(ext.equals(".txt")) {			
 			try {
 				FileReader fr = new FileReader(path); 
@@ -111,14 +112,17 @@ public class Context {
 					strings.add(s);
 				} 
 				fr.close(); 
-				Purpose pur = searchPurpose(strings.get(6));
+				Purpose pur = searchPurpose(strings.get(6));				
 				Scope scp = searchScope(strings.get(7));
+				if(strings.get(0).isEmpty() || strings.get(1).isEmpty() || strings.get(2).isEmpty() || strings.get(3).isEmpty() || strings.get(4).isEmpty() || strings.get(5).isEmpty() || pur==null || scp==null) {
+					throw new Exception();
+				}
 				Pattern p = new Pattern(strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),pur,scp);
 				patterns.add(p);
 				writeObject(p);
 			}
 			catch(Exception e) {
-				e.printStackTrace();
+				b = false;
 			}
 			
 		}
@@ -131,18 +135,15 @@ public class Context {
 			
 				doc.getDocumentElement().normalize();
 				NodeList nList = doc.getElementsByTagName("pattern");
-				for (int temp = 0; temp < nList.getLength(); temp++) {
-					 
-					Node nNode = nList.item(temp);
-			 
-					System.out.println("\nCurrent Element :" + nNode.getNodeName());
-			 
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			 
-						Element eElement = (Element) nNode;
-						
+				for (int temp = 0; temp < nList.getLength(); temp++) {					 
+					Node nNode = nList.item(temp); 			 
+					if (nNode.getNodeType() == Node.ELEMENT_NODE) {			 
+						Element eElement = (Element) nNode;						
 						Purpose pur = searchPurpose(eElement.getElementsByTagName("purpose").item(0).getTextContent());
 						Scope scp = searchScope(eElement.getElementsByTagName("scope").item(0).getTextContent());
+						if(pur==null || scp==null) {
+							throw new Exception();
+						}
 						Pattern p = new Pattern(eElement.getElementsByTagName("name").item(0).getTextContent(),eElement.getElementsByTagName("context").item(0).getTextContent(),eElement.getElementsByTagName("problem").item(0).getTextContent(),eElement.getElementsByTagName("solution").item(0).getTextContent(),eElement.getElementsByTagName("diagram").item(0).getTextContent(),eElement.getElementsByTagName("consequences").item(0).getTextContent(),pur,scp);
 						patterns.add(p);
 						writeObject(p);
@@ -150,12 +151,10 @@ public class Context {
 				}
 			}
 			catch(Exception e) {
-				e.printStackTrace();
+				b = false;
 			}
 		}
-		else {
-			
-		}
+		return b;
 	}
 	
 	private void writeObject(Pattern p) {
