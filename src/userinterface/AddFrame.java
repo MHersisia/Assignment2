@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import domain.Context;
 
@@ -18,7 +19,7 @@ public class AddFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel panel;
-	private JButton mb1,mb2;
+	private JButton mb1;
 	private JFileChooser fc;
 	private Context con;
 	
@@ -47,6 +48,8 @@ public class AddFrame extends JFrame {
 			fc = new JFileChooser();
 			fc.setDialogTitle("Choose a pattern");
 			fc.setMultiSelectionEnabled(true);
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt, .xml", "txt","xml");
+			fc.setFileFilter(filter);
 			int returnVal = fc.showOpenDialog(panel);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File[] files = fc.getSelectedFiles();
