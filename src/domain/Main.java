@@ -61,20 +61,7 @@ public class Main {
 	      }
 	    }
 		
-		new MainFrame(c);
-		
-		for(Pattern p : c.getPatterns()) {
-			try{
-			 
-			FileOutputStream fos = new FileOutputStream("objecten/"+p.getName()+".obj");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);   
-			oos.writeObject(p);
-			oos.close();
-	 
-		   }catch(Exception ex){
-			   ex.printStackTrace();
-		   }
-		}
+		new MainFrame(c);		
 	}
 
 }

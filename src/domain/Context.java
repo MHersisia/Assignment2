@@ -104,6 +104,16 @@ public class Context {
 		return patterns;
 	}
 	
+	public Pattern searchPattern(String s) {
+		Pattern p = null;
+		for(Pattern pa : patterns) {
+			if(pa.getName().equals(s)) {
+				p = pa;
+			}
+		}
+		return p;
+	}
+	
 	public boolean parseToPattern(String path,String file,String ext) {
 		boolean b = true;
 		if(ext.equals(".txt")) {			
@@ -161,7 +171,7 @@ public class Context {
 		return b;
 	}
 	
-	private void writeObject(Pattern p) {
+	public void writeObject(Pattern p) {
 		try{
 		 
 		FileOutputStream fos = new FileOutputStream("objecten/"+p.getName()+".obj");
