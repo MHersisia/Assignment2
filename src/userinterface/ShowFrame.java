@@ -1,12 +1,9 @@
 package userinterface;
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -23,7 +20,7 @@ public class ShowFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
-	private JLabel lab,lab1,lab2,lab3,lab4,lab5,lab6,lab7,labImage,lab8,lab9,lab10,lab11;
+	private JLabel lab,lab1,lab2,lab3,lab4,lab5,lab6,lab7,labImage,lab8,lab9,lab10,lab11,lab12,lab13;
 	private Pattern pattern;
 	private GridBagConstraints c = new GridBagConstraints();
 	public ShowFrame(Pattern p) {
@@ -83,19 +80,28 @@ public class ShowFrame extends JFrame {
 		c.gridy = 4;
 		panel.add(lab7,c);
 		
-		lab2 = new JLabel("Purpose:                        "+pattern.getPurpose().getName());
+		lab2 = new JLabel("Purpose:");
 		c.gridx = 0;
 		c.gridy = 5;
 		panel.add(lab2,c);
+		lab12 = new JLabel(pattern.getPurpose().getName());
+		c.gridx = 2;
+		c.gridy = 5;
+		panel.add(lab12,c);
 		
-		lab3 = new JLabel("Scope:                            "+pattern.getScope().getName());
+		lab3 = new JLabel("Scope:");
 		c.gridx = 0;
 		c.gridy = 6;
 		panel.add(lab3,c);
+		lab13 = new JLabel(pattern.getScope().getName());
+		c.gridx = 2;
+		c.gridy = 6;
+		panel.add(lab13,c);
+		
 		try{
 			URL url  = new URL(pattern.getDiagram());
 			BufferedImage image = ImageIO.read(url);
-			BufferedImage resizedImg = Scalr.resize(image, 420, 240, Scalr.OP_ANTIALIAS);
+			BufferedImage resizedImg = Scalr.resize(image,450, 240, Scalr.OP_ANTIALIAS);
 			labImage = new JLabel(new ImageIcon(resizedImg));
 			c.gridx = 0;
 			c.gridy = 10;
