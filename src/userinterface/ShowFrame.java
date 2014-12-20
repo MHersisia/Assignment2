@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.imgscalr.Scalr;
 
@@ -25,12 +26,13 @@ public class ShowFrame extends JFrame {
 	private GridBagConstraints c = new GridBagConstraints();
 	public ShowFrame(Pattern p) {
 		super("Show Pattern");
-		
+		JScrollPane scroll;
 		pattern = p;
 		panel = new JPanel();
 		getContentPane().add(panel,BorderLayout.NORTH);
 		panel.setLayout(new GridBagLayout());
-
+		scroll = new JScrollPane(panel);
+		add(scroll);
 		
 		lab = new JLabel("Name:");
 		c.gridx = 0;
@@ -75,7 +77,7 @@ public class ShowFrame extends JFrame {
 		c.gridx = 0;
 		c.gridy = 4;
 		panel.add(lab11,c);
-		lab7 = new JLabel(pattern.getConsequences());
+		lab7 = new JLabel("<html><body style='width: 300 px'>"+pattern.getConsequences());
 		c.gridx = 2;
 		c.gridy = 4;
 		panel.add(lab7,c);
