@@ -53,13 +53,15 @@ public class ShowFrame extends JFrame {
 		c.gridx = 2;
 		c.gridy = 1;
 		c.gridwidth = 300;
+		c.ipadx = 10;
+		c.ipady = 10;
 		panel.add(lab4,c);
 		
 		lab9 = new JLabel("Problem:");
 		c.gridx = 0;
 		c.gridy = 2;
 		panel.add(lab9,c);
-		lab5 = new JLabel("<html><body style='width: 300 px'>"+"Problem:      "+pattern.getProblem());
+		lab5 = new JLabel("<html><body style='width: 300 px'>"+pattern.getProblem());
 		c.gridx = 2;
 		c.gridy = 2;
 		panel.add(lab5,c);
