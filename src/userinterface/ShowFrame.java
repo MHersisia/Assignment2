@@ -1,9 +1,12 @@
 package userinterface;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -11,6 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.imgscalr.Scalr;
 
 import domain.Pattern;
 
@@ -90,7 +95,8 @@ public class ShowFrame extends JFrame {
 		try{
 			URL url  = new URL(pattern.getDiagram());
 			BufferedImage image = ImageIO.read(url);
-			labImage = new JLabel(new ImageIcon(image));
+			BufferedImage resizedImg = Scalr.resize(image, 420, 240, Scalr.OP_ANTIALIAS);
+			labImage = new JLabel(new ImageIcon(resizedImg));
 			c.gridx = 0;
 			c.gridy = 10;
 			panel.add(labImage,c);
