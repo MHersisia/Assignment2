@@ -26,13 +26,13 @@ public class EditFrame extends JFrame{
 	private JTextArea tf1,tf2,tf3,tf4,tf5;
 	private JComboBox<String> cb1,cb2;
 	private JButton jb1;
-	private Pattern pattern;
+	private Pattern oldPattern;
 	private Context con;
 	private GridBagConstraints c = new GridBagConstraints();
 	public EditFrame(Pattern p,Context cn){
 		super("Edit Pattern");
 		
-		pattern = p;
+		oldPattern = p;
 		con = cn;
 		panel = new JPanel();
 		getContentPane().add(panel,BorderLayout.NORTH);
@@ -44,7 +44,7 @@ public class EditFrame extends JFrame{
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(lab,c);
 		
-		tf1 = new JTextArea(pattern.getContext());
+		tf1 = new JTextArea(oldPattern.getContext());
 		c.gridx = 1;
 		c.gridy = 0;
 		c.anchor = GridBagConstraints.WEST;
@@ -61,7 +61,7 @@ public class EditFrame extends JFrame{
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(lab2,c);
 		
-		tf2 = new JTextArea(pattern.getProblem());
+		tf2 = new JTextArea(oldPattern.getProblem());
 		c.gridx = 1;
 		c.gridy = 2;
 		c.anchor = GridBagConstraints.WEST;
@@ -78,7 +78,7 @@ public class EditFrame extends JFrame{
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(lab3,c);
 		
-		tf3 = new JTextArea(pattern.getSolution());
+		tf3 = new JTextArea(oldPattern.getSolution());
 		c.gridx = 1;
 		c.gridy = 4;
 		c.anchor = GridBagConstraints.WEST;
@@ -95,7 +95,7 @@ public class EditFrame extends JFrame{
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(lab4,c);
 		
-		tf4 = new JTextArea(pattern.getDiagram());
+		tf4 = new JTextArea(oldPattern.getDiagram());
 		c.gridx = 1;
 		c.gridy = 6;
 		c.anchor = GridBagConstraints.WEST;
@@ -112,7 +112,7 @@ public class EditFrame extends JFrame{
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(lab5,c);
 		
-		tf5 = new JTextArea(pattern.getConsequences());
+		tf5 = new JTextArea(oldPattern.getConsequences());
 		c.gridx = 1;
 		c.gridy = 8;
 		c.anchor = GridBagConstraints.WEST;
@@ -130,6 +130,7 @@ public class EditFrame extends JFrame{
 		panel.add(lab6,c);
 
 		cb1 = new JComboBox<String>(con.getPurposesString());
+		cb1.setSelectedItem(oldPattern.getPurpose().getName());
 		c.gridx = 1;
 		c.gridy = 10;
 		c.anchor = GridBagConstraints.WEST;
@@ -147,6 +148,7 @@ public class EditFrame extends JFrame{
 		panel.add(lab7,c);
 		
 		cb2 = new JComboBox<String>(con.getScopesString());
+		cb2.setSelectedItem(oldPattern.getScope().getName());
 		c.gridx = 1;
 		c.gridy = 12;
 		c.anchor = GridBagConstraints.WEST;
@@ -174,18 +176,18 @@ public class EditFrame extends JFrame{
 				JOptionPane.showMessageDialog(null, "Please fill in all fields", "Error",JOptionPane.ERROR_MESSAGE);
 			}
 			else {
-				Pattern pat = con.searchPattern(pattern.getName());
-				pat.setContext(tf1.getText());
-				pat.setProblem(tf2.getText());
-				pat.setSolution(tf3.getText());
-				pat.setDiagram(tf4.getText());
-				pat.setConsequences(tf5.getText());
+				Pattern newPattern = con.searchPattern(oldPattern.getName());
+				newPattern.setContext(tf1.getText());
+				newPattern.setProblem(tf2.getText());
+				newPattern.setSolution(tf3.getText());
+				newPattern.setDiagram(tf4.getText());
+				newPattern.setConsequences(tf5.getText());
 				Purpose pur = con.searchPurpose((String)cb1.getSelectedItem());
-				pat.setPurpose(pur);
+				newPattern.setPurpose(pur);
 				Scope scp = con.searchScope((String)cb2.getSelectedItem());
-				pat.setScope(scp);
-				con.writeObject(pat);
-				JOptionPane.showMessageDialog(null, pat.getName()+" is succesfully changed", pat.getName()+" changed",JOptionPane.PLAIN_MESSAGE);
+				newPattern.setScope(scp);
+				con.writeObject(newPattern);
+				JOptionPane.showMessageDialog(null, newPattern.getName()+" is succesfully changed", newPattern.getName()+" changed",JOptionPane.PLAIN_MESSAGE);
 				dispose();
 			}
 		}
