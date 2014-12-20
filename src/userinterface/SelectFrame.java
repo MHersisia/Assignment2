@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,7 +18,7 @@ import domain.Pattern;
 public class SelectFrame extends JFrame {
 	private Context con;
 	private JButton mb1,mb2,mb3,mb4;
-	private MyComboBox mcb1,mcb2,mcb3;
+	private JComboBox<String> mcb1,mcb2,mcb3;
 	private JPanel panel,panel_1,panel_2;
 
 	private static final long serialVersionUID = 1L;
@@ -34,10 +35,10 @@ public class SelectFrame extends JFrame {
             panel_1 = new JPanel();
             panel.add(panel_1);
             {                
-                mcb1 = new MyComboBox(c.getPurposesString());
+                mcb1 = new JComboBox<String>(c.getPurposesString());
         		panel_1.add(mcb1);
         		
-        		mcb2 = new MyComboBox(c.getScopesString());
+        		mcb2 = new JComboBox<String>(c.getScopesString());
         		panel_1.add(mcb2);
         		
         		mb1 = new JButton("Search");
@@ -50,7 +51,7 @@ public class SelectFrame extends JFrame {
             panel.add(panel_2);
             panel_2.setVisible(false);
             {                
-                mcb3 = new MyComboBox();
+                mcb3 = new JComboBox<String>();
                 panel_2.add(mcb3);        		
         		
         		mb2 = new JButton("Show");
