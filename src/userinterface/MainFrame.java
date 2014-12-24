@@ -78,7 +78,7 @@ public class MainFrame extends JFrame {
 		panel2.add(mb2,c);
         mb2.addActionListener(editPattern);
         
-        mb3 = new JButton("Export Pattern");
+        mb3 = new JButton("Export Patterns");
         c.gridx = 0;
 		c.gridy = 0;		
 		c.anchor = GridBagConstraints.CENTER;
