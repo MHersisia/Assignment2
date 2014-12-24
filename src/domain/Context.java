@@ -114,6 +114,15 @@ public class Context {
 		return p;
 	}
 	
+	public void checkOldPattern(Pattern p) {
+		for(Pattern pa : patterns) {
+			if(pa.getName().equals(p.getName())) {
+				patterns.remove(pa);
+				break;
+			}
+		}
+	}
+	
 	public boolean parseToPattern(String path,String file,String ext) {
 		boolean b = true;
 		if(ext.equals(".txt")) {			
@@ -132,6 +141,7 @@ public class Context {
 					throw new Exception();
 				}
 				Pattern p = new Pattern(strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),pur,scp);
+				checkOldPattern(p);
 				patterns.add(p);
 				writeObject(p);
 			}
@@ -159,6 +169,7 @@ public class Context {
 							throw new Exception();
 						}
 						Pattern p = new Pattern(eElement.getElementsByTagName("name").item(0).getTextContent(),eElement.getElementsByTagName("context").item(0).getTextContent(),eElement.getElementsByTagName("problem").item(0).getTextContent(),eElement.getElementsByTagName("solution").item(0).getTextContent(),eElement.getElementsByTagName("diagram").item(0).getTextContent(),eElement.getElementsByTagName("consequences").item(0).getTextContent(),pur,scp);
+						checkOldPattern(p);
 						patterns.add(p);
 						writeObject(p);
 					}
