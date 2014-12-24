@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "pattern")
@@ -88,6 +89,7 @@ public class Pattern implements Serializable {
 		purposeString = p.getName();
 	}
 	
+	@XmlTransient
 	public Category getPurpose() {
 		return purpose;
 	}
@@ -97,6 +99,7 @@ public class Pattern implements Serializable {
 		scopeString = s.getName();
 	}
 	
+	@XmlTransient
 	public Category getScope() {
 		return scope;
 	}
