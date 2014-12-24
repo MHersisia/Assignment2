@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,9 +20,10 @@ public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-	private JButton mb1,mb2;
+	private JButton mb1,mb2,mb3;
 	private JPanel panel,panel2;
 	private JLabel lab,lab1,lab2;
+	private JFileChooser fc;
 	private GridBagConstraints c = new GridBagConstraints();
 	
 	public MainFrame(Context cn) {
@@ -71,6 +73,12 @@ public class MainFrame extends JFrame {
 		panel2.add(mb2,c);
         mb2.addActionListener(editPattern);
         
+        mb3 = new JButton("Export Pattern");
+        c.gridx = 0;
+		c.gridy = 0;		
+		c.anchor = GridBagConstraints.CENTER;
+		panel2.add(mb3,c);
+		mb3.addActionListener(exportPattern);
 
 		setSize(500, 300);
 		setVisible(true);
@@ -86,6 +94,15 @@ public class MainFrame extends JFrame {
 	ActionListener editPattern = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			new SelectFrame(con);
+		}
+	};
+	ActionListener exportPattern = new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			fc = new JFileChooser();
+			fc.setDialogTitle("Choose a place to export");
+			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			fc.showOpenDialog(panel);
+			System.out.println(fc.getSelectedFile());
 		}
 	};
 
