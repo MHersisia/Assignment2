@@ -11,15 +11,17 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import domain.Context;
 import domain.Pattern;
 
 public class SelectFrame extends JFrame {
 	private Context con;
-	private JButton mb1,mb2,mb3,mb4;
+	private JButton mb1,mb2,mb3,mb4,mb5;
 	private JComboBox<String> mcb1,mcb2,mcb3;
-	private JPanel panel,panel_1,panel_2;
+	private JPanel panel,panel_0,panel_1,panel_2;
+	private JTextField tf1;
 
 	private static final long serialVersionUID = 1L;
 	
@@ -32,6 +34,18 @@ public class SelectFrame extends JFrame {
         getContentPane().add(panel, BorderLayout.NORTH);
         panel.setLayout(new GridLayout(0, 1, 0, 0));
         {
+        	panel_0 = new JPanel();
+        	panel.add(panel_0);
+        	{
+        		tf1 = new JTextField();
+        		tf1.setColumns( 15 );
+        		panel_0.add(tf1);
+        		mb5 = new JButton("Search by Term");
+        		panel_0.add(mb5);
+        		mb5.addActionListener(searchbyTerm);
+        	}
+        }
+        {
             panel_1 = new JPanel();
             panel.add(panel_1);
             {                
@@ -41,7 +55,7 @@ public class SelectFrame extends JFrame {
         		mcb2 = new JComboBox<String>(c.getCategoryString('s'));
         		panel_1.add(mcb2);
         		
-        		mb1 = new JButton("Search");
+        		mb1 = new JButton("Search by Categories");
         		mb1.addActionListener(searchPattern);
         		panel_1.add(mb1);
             }
@@ -72,6 +86,22 @@ public class SelectFrame extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}	
+	
+	ActionListener searchbyTerm = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			mcb3.removeAllItems();
+			String term = tf1.getText();
+			for(Pattern p : con.getPatterns()) {
+				if(p.getName().toUpperCase().contains(term.toUpperCase())) {
+					mcb3.addItem(p.getName());
+				}
+			}
+			panel_2.setVisible(true);
+			if(mcb3.getItemCount()==0) {
+				panel_2.setVisible(false);
+			}
+		}
+	};
 	
 	ActionListener searchPattern = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
