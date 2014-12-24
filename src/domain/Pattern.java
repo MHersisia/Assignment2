@@ -2,12 +2,12 @@ package domain;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "pattern")
-@XmlType(propOrder = {"name", "context", "problem", "solution", "diagram", "consequences", "purpose", "scope"})
+@XmlType(propOrder = {"name", "context", "problem", "solution", "diagram", "consequences", "purposeString", "scopeString"})
 public class Pattern implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,6 +17,8 @@ public class Pattern implements Serializable {
 	private String solution;
 	private String diagram;
 	private String consequences;
+	private String purposeString;
+	private String scopeString;
 	private Category purpose;
 	private Category scope;
 	
@@ -83,16 +85,18 @@ public class Pattern implements Serializable {
 
 	public void setPurpose(Category p) {
 		purpose = p;
+		purposeString = p.getName();
 	}
-	@XmlAttribute
+	
 	public Category getPurpose() {
 		return purpose;
 	}
 	
 	public void setScope(Category s) {
 		scope = s;
+		scopeString = s.getName();
 	}
-	@XmlAttribute
+	
 	public Category getScope() {
 		return scope;
 	}
@@ -103,5 +107,12 @@ public class Pattern implements Serializable {
 	public void setName(String name){
 		this.name = name;
 	}
-
+	@XmlElement(name = "scope")
+	public String getScopeString(){
+		return scopeString;
+	}
+	@XmlElement(name = "purpose")
+	public String getPurposeString(){
+		return purposeString;
+	}
 }
