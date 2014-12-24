@@ -43,9 +43,7 @@ public class Main {
 	      } else if (listOfFiles[i].isDirectory()) {
 	        System.out.println("Directory " + listOfFiles[i].getName());
 	      }
-	    }
-	    
-	    System.out.println(c.getPatterns());
+	    }	    
 		
 		new MainFrame(c);		
 	}
