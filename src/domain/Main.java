@@ -25,17 +25,17 @@ public class Main {
 		File folder = new File("objecten");
 		File[] listOfFiles = folder.listFiles();
 		
-
+		
 	    for (int i = 0; i < listOfFiles.length; i++) {
 	    	String ext = listOfFiles[i].getName().substring(listOfFiles[i].getName().lastIndexOf('.'));
-	      if (listOfFiles[i].isFile() && ext.equals("obj")) {
+	      if (listOfFiles[i].isFile() && ext.equals(".obj")) {
 	        try(
 	  	  	      InputStream file = new FileInputStream("objecten/"+listOfFiles[i].getName());
 	  	  	      InputStream buffer = new BufferedInputStream(file);
 	  	  	      ObjectInput input = new ObjectInputStream (buffer);
 	  	  	    ){
 	        		Pattern p = (Pattern)input.readObject();
-	        		c.addPattern(p);
+	        		c.addPattern(p);	        		
 	  	  	    }
 	  	  	    catch(Exception ex){
 	  	  	    	ex.printStackTrace();
@@ -44,6 +44,8 @@ public class Main {
 	        System.out.println("Directory " + listOfFiles[i].getName());
 	      }
 	    }
+	    
+	    System.out.println(c.getPatterns());
 		
 		new MainFrame(c);		
 	}
