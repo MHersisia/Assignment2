@@ -9,18 +9,15 @@ import java.beans.XMLEncoder;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import domain.Context;
-import domain.Pattern;
 
 public class MainFrame extends JFrame {
 	
@@ -113,7 +110,8 @@ public class MainFrame extends JFrame {
 			System.out.println(fc.getSelectedFile());
 			
 			try{
-				FileOutputStream os = new FileOutputStream(fc.getSelectedFile());
+				Calendar lCDateTime = Calendar.getInstance();
+				FileOutputStream os = new FileOutputStream(fc.getSelectedFile()+"\\patterns_"+lCDateTime.getTimeInMillis()+".xml");
 			    XMLEncoder encoder = new XMLEncoder(os);
 			    encoder.writeObject(con.getPatterns());
 			    encoder.close();
