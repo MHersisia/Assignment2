@@ -5,19 +5,19 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.XMLEncoder;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Calendar;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import domain.Context;
+import domain.Pattern;
 
 public class MainFrame extends JFrame {
 	
@@ -110,17 +110,16 @@ public class MainFrame extends JFrame {
 			System.out.println(fc.getSelectedFile());
 			
 			try{
-				Calendar lCDateTime = Calendar.getInstance();
-				FileOutputStream os = new FileOutputStream(fc.getSelectedFile()+"\\patterns_"+lCDateTime.getTimeInMillis()+".xml");
-			    XMLEncoder encoder = new XMLEncoder(os);
-			    encoder.writeObject(con.getPatterns());
-			    encoder.close();
-			    os.close();
-			}catch(FileNotFoundException ex){
-		    	ex.printStackTrace();
-		    }catch(IOException ex2){
-		    	ex2.printStackTrace();
-		    }
+	            JAXBContext context = JAXBContext.newInstance(Pattern.class);
+	            Marshaller m = context.createMarshaller();
+	            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+	 
+	            for(Pattern p : con.getPatterns()) {
+	            	m.marshal(p, new File(fc.getSelectedFile()+"\\pattern_"+p.getName()+".xml"));
+	            }
+			}catch (JAXBException ex) {
+	            ex.printStackTrace();
+	        }
 		}
 	};
 
