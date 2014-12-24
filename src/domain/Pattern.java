@@ -41,7 +41,9 @@ public class Pattern implements Serializable {
 		diagram = d;
 		consequences = con;
 		purpose = pu;
+		purposeString = pu.getName();
 		scope = sc;
+		scopeString = sc.getName();
 	}
 	
 	public String getContext() {
