@@ -35,10 +35,10 @@ public class SelectFrame extends JFrame {
             panel_1 = new JPanel();
             panel.add(panel_1);
             {                
-                mcb1 = new JComboBox<String>(c.getPurposesString());
+                mcb1 = new JComboBox<String>(c.getCategoryString('p'));
         		panel_1.add(mcb1);
         		
-        		mcb2 = new JComboBox<String>(c.getScopesString());
+        		mcb2 = new JComboBox<String>(c.getCategoryString('s'));
         		panel_1.add(mcb2);
         		
         		mb1 = new JButton("Search");

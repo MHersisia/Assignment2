@@ -14,12 +14,12 @@ public class Main {
 	public static void main(String[] args) {
 		Context c = new Context();
 		
-		Purpose p1 = new Purpose("Creational"); c.addPurpose(p1);
-		Purpose p2 = new Purpose("Structural"); c.addPurpose(p2);
-		Purpose p3 = new Purpose("Behavioral"); c.addPurpose(p3);
+		Category p1 = new Purpose("Creational"); c.addCategory(p1);
+		Category p2 = new Purpose("Structural"); c.addCategory(p2);
+		Category p3 = new Purpose("Behavioral"); c.addCategory(p3);
 		
-		Scope s1 = new Scope("Class"); c.addScope(s1);
-		Scope s2 = new Scope("Object"); c.addScope(s2);
+		Category s1 = new Scope("Class"); c.addCategory(s1);
+		Category s2 = new Scope("Object"); c.addCategory(s2);
 		
 	
 		File folder = new File("objecten");

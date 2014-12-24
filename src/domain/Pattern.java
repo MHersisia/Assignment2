@@ -11,8 +11,8 @@ public class Pattern implements Serializable {
 	private String solution;
 	private String diagram;
 	private String consequences;
-	private Purpose purpose;
-	private Scope scope;
+	private Category purpose;
+	private Category scope;
 	
 	public Pattern() {
 		
@@ -24,7 +24,7 @@ public class Pattern implements Serializable {
 		scope = s;
 	}
 	
-	public Pattern(String n,String cxt,String p,String s,String d,String con,Purpose pu,Scope sc) {
+	public Pattern(String n,String cxt,String p,String s,String d,String con,Category pu,Category sc) {
 		name = n;
 		context = cxt;
 		problem = p;
@@ -75,19 +75,19 @@ public class Pattern implements Serializable {
 		this.consequences = consequences;
 	}
 
-	public void setPurpose(Purpose p) {
+	public void setPurpose(Category p) {
 		purpose = p;
 	}
 	
-	public Purpose getPurpose() {
+	public Category getPurpose() {
 		return purpose;
 	}
 	
-	public void setScope(Scope s) {
+	public void setScope(Category s) {
 		scope = s;
 	}
 	
-	public Scope getScope() {
+	public Category getScope() {
 		return scope;
 	}
 	

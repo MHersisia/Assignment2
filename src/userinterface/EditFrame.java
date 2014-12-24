@@ -14,10 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import domain.Category;
 import domain.Context;
 import domain.Pattern;
-import domain.Purpose;
-import domain.Scope;
 
 public class EditFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -129,7 +128,7 @@ public class EditFrame extends JFrame{
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(lab6,c);
 
-		cb1 = new JComboBox<String>(con.getPurposesString());
+		cb1 = new JComboBox<String>(con.getCategoryString('p'));
 		cb1.setSelectedItem(oldPattern.getPurpose().getName());
 		c.gridx = 1;
 		c.gridy = 10;
@@ -147,7 +146,7 @@ public class EditFrame extends JFrame{
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(lab7,c);
 		
-		cb2 = new JComboBox<String>(con.getScopesString());
+		cb2 = new JComboBox<String>(con.getCategoryString('s'));
 		cb2.setSelectedItem(oldPattern.getScope().getName());
 		c.gridx = 1;
 		c.gridy = 12;
@@ -182,9 +181,9 @@ public class EditFrame extends JFrame{
 				newPattern.setSolution(tf3.getText());
 				newPattern.setDiagram(tf4.getText());
 				newPattern.setConsequences(tf5.getText());
-				Purpose pur = con.searchPurpose((String)cb1.getSelectedItem());
+				Category pur = con.searchCategory((String)cb1.getSelectedItem());
 				newPattern.setPurpose(pur);
-				Scope scp = con.searchScope((String)cb2.getSelectedItem());
+				Category scp = con.searchCategory((String)cb2.getSelectedItem());
 				newPattern.setScope(scp);
 				con.writeObject(newPattern);
 				JOptionPane.showMessageDialog(null, newPattern.getName()+" is succesfully changed", newPattern.getName()+" changed",JOptionPane.PLAIN_MESSAGE);

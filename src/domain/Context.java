@@ -16,71 +16,71 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Context {
-	private ArrayList<Purpose> purposes;
-	private ArrayList<Scope> scopes;
+	private ArrayList<Category> purposes;
+	private ArrayList<Category> scopes;
 	private ArrayList<Pattern> patterns;
 
 	public Context() {
-		purposes = new ArrayList<Purpose>();
-		scopes = new ArrayList<Scope>();
+		purposes = new ArrayList<Category>();
+		scopes = new ArrayList<Category>();
 		patterns = new ArrayList<Pattern>();
 	}
 	
-	public void addPurpose(Purpose p) {
-		purposes.add(p);
+	public void addCategory(Category c) {
+		if(c instanceof Purpose) {
+			purposes.add(c);
+		}
+		else if(c instanceof Scope) {
+			scopes.add(c);
+		}
 	}
 	
-	public String[] getPurposesString() {
-		String[] array = new String[purposes.size()];
-		int counter = 0;
-		for(Purpose p : purposes) {
-			array[counter] = p.getName();
-			counter++;
+	public String[] getCategoryString(char c) {
+		String[] array = null;
+		if(c=='p') {
+			array = new String[purposes.size()];
+			int counter = 0;
+			for(Category p : purposes) {
+				array[counter] = p.getName();
+				counter++;
+			}
+		}
+		else if(c=='s') {
+			array = new String[scopes.size()];
+			int counter = 0;
+			for(Category s : scopes) {
+				array[counter] = s.getName();
+				counter++;
+			}			
 		}
 		return array;
 	}
 	
-	public ArrayList<Purpose> getPurposes() {
-		return purposes;
+	public ArrayList<Category> getCategories(char c) {
+		ArrayList<Category> list = null;
+		if(c=='p') {
+			list = purposes;
+		}
+		else if(c=='s') {
+			list =  scopes;
+		}
+		return list;
 	}
 	
-	public Purpose searchPurpose(String s) {
-		Purpose p = null;
-		for(Purpose pu : purposes) {
-			if(pu.getName().equals(s)) {
-				p = pu;
+	public Category searchCategory(String s) {
+		Category c = null;
+		for(Category ca: purposes) {
+			if(ca.getName().equals(s)) {
+				c = ca;
 			}
 		}
-		return p;
-	}
-	
-	public void addScope(Scope s) {
-		scopes.add(s);
-	}
-	
-	public String[] getScopesString() {
-		String[] array = new String[scopes.size()];
-		int counter = 0;
-		for(Scope s : scopes) {
-			array[counter] = s.getName();
-			counter++;
-		}
-		return array;
-	}
-	
-	public ArrayList<Scope> getScopes() {
-		return scopes;
-	}
-	
-	public Scope searchScope(String s) {
-		Scope sc = null;
-		for(Scope scp : scopes) {
-			if(scp.getName().equals(s)) {
-				sc = scp;
+		for(Category ca: scopes) {
+			if(ca.getName().equals(s)) {
+				c = ca;
 			}
 		}
-		return sc;
-	}
+		return c;
+	}	
 	
 	public void addPattern(Pattern p) {
 		patterns.add(p);
@@ -126,8 +126,8 @@ public class Context {
 					strings.add(s);
 				} 
 				fr.close(); 
-				Purpose pur = searchPurpose(strings.get(6));				
-				Scope scp = searchScope(strings.get(7));
+				Category pur = searchCategory(strings.get(6));				
+				Category scp = searchCategory(strings.get(7));
 				if(strings.get(0).isEmpty() || strings.get(1).isEmpty() || strings.get(2).isEmpty() || strings.get(3).isEmpty() || strings.get(4).isEmpty() || strings.get(5).isEmpty() || pur==null || scp==null) {
 					throw new Exception();
 				}
@@ -153,8 +153,8 @@ public class Context {
 					Node nNode = nList.item(temp); 			 
 					if (nNode.getNodeType() == Node.ELEMENT_NODE) {			 
 						Element eElement = (Element) nNode;						
-						Purpose pur = searchPurpose(eElement.getElementsByTagName("purpose").item(0).getTextContent());
-						Scope scp = searchScope(eElement.getElementsByTagName("scope").item(0).getTextContent());
+						Category pur = searchCategory(eElement.getElementsByTagName("purpose").item(0).getTextContent());
+						Category scp = searchCategory(eElement.getElementsByTagName("scope").item(0).getTextContent());
 						if(pur==null || scp==null) {
 							throw new Exception();
 						}
