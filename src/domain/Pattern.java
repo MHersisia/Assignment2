@@ -1,6 +1,8 @@
 package domain;
 
 import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -82,7 +84,7 @@ public class Pattern implements Serializable {
 	public void setPurpose(Category p) {
 		purpose = p;
 	}
-	
+	@XmlAttribute
 	public Category getPurpose() {
 		return purpose;
 	}
@@ -90,7 +92,7 @@ public class Pattern implements Serializable {
 	public void setScope(Category s) {
 		scope = s;
 	}
-	
+	@XmlAttribute
 	public Category getScope() {
 		return scope;
 	}
