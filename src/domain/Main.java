@@ -3,11 +3,9 @@ package domain;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import userinterface.MainFrame;
 
@@ -23,28 +21,14 @@ public class Main {
 		Scope s1 = new Scope("Class"); c.addScope(s1);
 		Scope s2 = new Scope("Object"); c.addScope(s2);
 		
-		for(Pattern p : c.getPatterns()) {
-			try{
-			 
-			FileOutputStream fout = new FileOutputStream("objecten/"+p.getName()+".obj");
-			ObjectOutputStream oos = new ObjectOutputStream(fout);   
-			oos.writeObject(p);
-			oos.close();
-	 
-		   }catch(Exception ex){
-			   ex.printStackTrace();
-		   }
-		}
-		
-		
-		//Pattern pat1 = new Pattern("Factory Method",p1,s1); c.addPattern(pat1);
-		//Pattern pat2 = new Pattern("Strategy",p3,s2);	c.addPattern(pat2);
-		
+	
 		File folder = new File("objecten");
 		File[] listOfFiles = folder.listFiles();
+		
 
 	    for (int i = 0; i < listOfFiles.length; i++) {
-	      if (listOfFiles[i].isFile()) {
+	    	String ext = listOfFiles[i].getName().substring(listOfFiles[i].getName().lastIndexOf('.'));
+	      if (listOfFiles[i].isFile() && ext.equals("obj")) {
 	        try(
 	  	  	      InputStream file = new FileInputStream("objecten/"+listOfFiles[i].getName());
 	  	  	      InputStream buffer = new BufferedInputStream(file);
