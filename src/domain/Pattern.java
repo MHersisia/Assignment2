@@ -1,7 +1,11 @@
 package domain;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
+@XmlRootElement(name = "pattern")
+@XmlType(propOrder = {"name", "context", "problem", "solution", "diagram", "consequences", "purpose", "scope"})
 public class Pattern implements Serializable {
 
 	private static final long serialVersionUID = 1L;
